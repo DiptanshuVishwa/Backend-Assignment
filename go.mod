@@ -1,4 +1,4 @@
-module backend-assignment
+module github.com/DiptanshuVishwa/Backend-Assignment
 
 go 1.26.1
 
