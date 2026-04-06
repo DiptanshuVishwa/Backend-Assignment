@@ -3,6 +3,9 @@ package src
 import "github.com/gofiber/fiber/v2"
 
 func SetupRoutes(app *fiber.App) {
+	app.Get("/", func(c *fiber.Ctx)error{
+		return c.SendString("Backend is running!")
+	})
 	app.Post("/login", LoginController)
 	app.Get("/dashboard", AuthMiddleware, func(c *fiber.Ctx) error {
 		username := c.Locals("username")
@@ -13,7 +16,6 @@ func SetupRoutes(app *fiber.App) {
 			"role":     role,
 		})
 	})
-
 	app.Get("/admin", AuthMiddleware, RoleMiddleware("admin", "superadmin"), func(c *fiber.Ctx) error {
 		return c.SendString("Welcome Admin")
 	})

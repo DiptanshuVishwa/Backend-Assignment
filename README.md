@@ -1,36 +1,41 @@
-# 🔐 Go Fiber Auth Backend (JWT + RBAC)
+# 🔐 Go Fiber Authentication System (JWT + RBAC)
 
-This project is a backend authentication system built using **Go + Fiber**.
-
-It implements:
-- JWT-based Authentication
-- Role-Based Access Control (RBAC)
-- Middleware architecture
-- Protected routes
+Backend authentication system built using **Golang (Fiber)** with **JWT authentication** and **Role-Based Access Control (RBAC)**.
 
 ---
 
 ## 🚀 Tech Stack
 
-- Go (Golang)
-- Fiber Framework
-- JWT (Authentication)
+* Golang
+* Fiber
+* JWT
 
 ---
 
-## 📌 Features
+## 📁 Project Structure
 
-- Login API with JWT token generation
-- Middleware for authentication
-- Role-based route protection
-- Clean project structure
+```
+go-auth-backend/
+│
+├── server.go
+├── go.mod
+│
+├── src/
+│   ├── app.go
+│   ├── routes.go
+│   ├── controllers.go
+│   ├── models.go
+│   ├── middleware.go
+│
+└── README.md
+```
 
 ---
 
-## 👥 Test Users
+## 👥 Demo Users
 
-| Username   | Role        |
-|-----------|------------|
+| Username  | Role       |
+| --------- | ---------- |
 | vikasJi   | superadmin |
 | diptanshu | admin      |
 | ashwin    | teacher    |
@@ -40,13 +45,69 @@ It implements:
 
 ## 🔑 API Endpoints
 
-### 1. Login
+### Login
 
-POST `/login`
+**POST** `/login`
 
-Body:
+**Body:**
+
 ```json
 {
   "username": "diptanshu",
   "password": "admin123"
 }
+```
+
+**Response:**
+
+```json
+{
+  "token": "JWT_TOKEN"
+}
+```
+
+---
+
+## 🔒 Protected Routes
+
+| Route      | Access            |
+| ---------- | ----------------- |
+| /dashboard | Any authenticated |
+| /admin     | admin, superadmin |
+| /teacher   | teacher           |
+| /student   | student           |
+
+---
+
+## 🔐 Authorization Header
+
+```
+Authorization: Bearer <JWT_TOKEN>
+```
+
+---
+
+## 🔄 Flow
+
+1. Login → validate user
+2. Generate JWT (username, role, exp)
+3. Send token in header
+4. AuthMiddleware → verify + extract claims
+5. RoleMiddleware → check access
+6. Return response
+
+---
+
+## ▶️ Run Locally
+
+```
+go run server.go
+```
+
+Server:
+
+```
+http://localhost:3000
+```
+
+---
