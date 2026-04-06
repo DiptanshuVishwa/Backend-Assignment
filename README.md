@@ -1,6 +1,6 @@
 # 🔐 Go Fiber Authentication System (JWT + RBAC)
 
-Backend authentication system built using **Golang (Fiber)** with **JWT authentication** and **Role-Based Access Control (RBAC)**.
+A backend authentication system built using **Golang (Fiber)** implementing **JWT-based authentication** and **Role-Based Access Control (RBAC)**.
 
 ---
 
@@ -15,7 +15,7 @@ Backend authentication system built using **Golang (Fiber)** with **JWT authenti
 ## 📁 Project Structure
 
 ```
-go-auth-backend/
+Backend-Assignment/
 │
 ├── server.go
 ├── go.mod
@@ -27,6 +27,7 @@ go-auth-backend/
 │   ├── models.go
 │   ├── middleware.go
 │
+├── screenshots/
 └── README.md
 ```
 
@@ -45,16 +46,16 @@ go-auth-backend/
 
 ## 🔑 API Endpoints
 
-### Login
+### 🔐 Login
 
 **POST** `/login`
 
-**Body:**
+**Request Body:**
 
 ```json
 {
   "username": "diptanshu",
-  "password": "admin123"
+  "password": "123"
 }
 ```
 
@@ -62,6 +63,7 @@ go-auth-backend/
 
 ```json
 {
+  "message": "Login successful",
   "token": "JWT_TOKEN"
 }
 ```
@@ -87,14 +89,15 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-## 🔄 Flow
+## 🔄 Request Flow
 
-1. Login → validate user
-2. Generate JWT (username, role, exp)
-3. Send token in header
-4. AuthMiddleware → verify + extract claims
-5. RoleMiddleware → check access
-6. Return response
+1. User sends login request
+2. Server validates credentials
+3. JWT token is generated (username, role, expiry)
+4. Token is sent in Authorization header
+5. AuthMiddleware verifies token and extracts claims
+6. RoleMiddleware checks access permissions
+7. Response is returned
 
 ---
 
@@ -104,10 +107,76 @@ Authorization: Bearer <JWT_TOKEN>
 go run server.go
 ```
 
-Server:
+Server runs at:
 
 ```
 http://localhost:3000
 ```
 
 ---
+
+## 🌐 Live API
+
+https://backend-assignment-q8k7.onrender.com
+
+---
+
+## 📸 API Testing Screenshots
+
+### 🔐 1. Login (Admin User)
+
+![Login Admin](./screenshots/login-admin.png)
+
+---
+
+### 🔐 2. Login (Superadmin User)
+
+![Login Superadmin](./screenshots/login-superadmin.png)
+
+---
+
+### 🔓 3. Access Protected Route (/dashboard)
+
+![Dashboard Access](./screenshots/dashboard.png)
+
+---
+
+### 👑 4. Admin Route Access
+
+![Admin Access](./screenshots/admin-success.png)
+
+---
+
+### 🎓 5. Student Login
+
+![Student Login](./screenshots/student-login.png)
+
+---
+
+### ❌ 6. Unauthorized Access (Wrong Role)
+
+![Access Denied](./screenshots/forbidden.png)
+
+---
+
+## ⚠️ Limitations
+
+* No database (uses in-memory map)
+* No password hashing
+* No refresh tokens
+
+---
+
+## 🚀 Future Improvements
+
+* MongoDB/PostgreSQL integration
+* Password hashing using bcrypt
+* Refresh token implementation
+* Environment-based configuration
+
+---
+
+## 👨‍💻 Author
+
+**Diptanshu Vishwa**
+Backend & Full Stack Developer
